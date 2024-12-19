@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="my-80 ">
+        <h1 class="text-center block  "> Coming soon.... <br> But Look to our Telegram Chanel <br> There you can find
+            answers to your quation
+
+        </h1>
+        <a class="bg-yellow-300 text-white text-xl ml-18 block  text-center mt-8 p-2 rounded-lg  active:scale-95 duration-300"
+            target="_blank" href="https://t.me/TapperComunity">Telegram</a>
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #3f2e00, #ffb800);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .navbar {
+            width: 100%;
+            background: gold;
+            text-align: center;
+            color: #ffcc00;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            z-index: 10;
+        }
+    </style>
+    <div class="navbar" id="navbar">
+        <a href="./index.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./home.png"
+                alt=""></a>
+        <a href="./tasks.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./to-do-list.png"
+                alt=""></a>
+        <a href="./friends.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./group.png"
+                alt=""></a>
+        <a href="./airdrop.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./coin.png"
+                alt=""></a>
+    </div>
+</body>
+
+</html>

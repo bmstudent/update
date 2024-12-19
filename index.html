@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tapper Game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #3f2e00, #ffb800);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .header-box {
+      width: 100%;
+      background: linear-gradient(180deg, #3f2e00, #ffb800);
+      text-align: center;
+      color: #ffcc00;
+      padding: 10px 0;
+      position: absolute;
+      top: 0;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-box img {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      width: 95%;
+      max-width: 600px;
+      margin-top: 60px;
+      /* Header bilan oraliq */
+    }
+
+    .gold-coin {
+      background: radial-gradient(circle, #ffcc00, #ffb800);
+      width: 80vw;
+      height: 80vw;
+      margin: 20px auto;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+      position: relative;
+      /* cursor: pointer; */
+      font-size: 10vw;
+      font-weight: bold;
+      color: #fff;
+      transition: transform 0.3s ease;
+      margin-top: -32px;
+    }
+
+    .gold-coin:focus {
+      outline: none;
+      /* Fokusdagi ko'rinishni yo'q qilish */
+    }
+
+    .gold-coin:hover {
+      transform: scale(0.95);
+      /* Hoverda kichrayish */
+    }
+
+    .gold-coin .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      /* Rasm o'lchami */
+      height: 100%;
+      border-radius: 50%;
+      /* pointer-events: none; Rasm ustida kliklanishdan himoya */
+
+    }
+
+
+    .stats {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    .level,
+    .remaining {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .progress-bar {
+      background: #555;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-bar .fill {
+      background: #ffcc00;
+      height: 100%;
+      width: 0;
+    }
+
+    @media (min-width: 768px) {
+      .gold-coin {
+        width: 250px;
+        height: 250px;
+        font-size: 48px;
+      }
+
+      .gold-coin .logo {
+        font-size: 24px;
+      }
+
+      .stats {
+        font-size: 32px;
+      }
+
+      .level,
+      .remaining {
+        font-size: 24px;
+      }
+    }
+
+    .navbar {
+      width: 100%;
+      background: gold;
+      text-align: center;
+      color: #ffcc00;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      z-index: 10;
+    }
+
+    .navbar a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header-box font-mono">
+    <img class="rounded-full" src="./new tapper.webp" alt="Tapper Logo">
+    $TAPPER = 0.000001$
+    <img class="rounded-full" src="./new tapper.webp" alt="Tapper Logo">
+
+  </div>
+  <div class="container">
+    <div class="gold-coin" id="goldCoin">
+      <img class="logo object-cover w-full h-full" src="./new tapper.webp" alt="Tapper Logo">
+    </div>
+
+    <div class="stats">💰 $TAPPER coin: <span id="goldCount">0</span></div>
+    <div class="level" id="levelDisplay">Level: Wood</div>
+    <div class="remaining" id="remainingDisplay">Remained: 100</div>
+    <div class="progress-bar">
+      <div class="fill" id="progressFill"></div>
+    </div>
+
+  </div>
+  <div class="navbar" id="navbar">
+    <a href="./index.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./home.png" alt=""></a>
+    <a href="./tasks.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./to-do-list.png"
+        alt=""></a>
+    <a href="./friends.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./group.png"
+        alt=""></a>
+    <a href="./airdrop.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./coin.png" alt=""></a>
+  </div>
+  <script>
+    const goldCoin = document.getElementById("goldCoin");
+    const goldCount = document.getElementById("goldCount");
+    const levelDisplay = document.getElementById("levelDisplay");
+    const remainingDisplay = document.getElementById("remainingDisplay");
+    const progressFill = document.getElementById("progressFill");
+
+    // Mahalliy saqlashdan qiymatlarni olish
+    let count = localStorage.getItem("goldCount") ? parseInt(localStorage.getItem("goldCount")) : 0;
+    let level = localStorage.getItem("level") ? parseInt(localStorage.getItem("level")) : 1;
+    let progress = localStorage.getItem("progress") ? parseInt(localStorage.getItem("progress")) : 0;
+
+    const levelNames = ["Wood", "Bronze", "Silver", "Gold", "Legendary", "Master", "GrandMaster", "President"];
+    const levelRequirements = [100, 125, 1000, 1200, 100000, 120000, 5000000, 10000000]; // Har level uchun kerakli tanga
+    const levelUpRequirements = [100, 25, 100, 125, 1000, 1200, 125000, 500000]; // Qo'shimcha tangalar
+
+    function updateLevelAndProgress() {
+      // Hozirgi progressga qarab keyingi darajani tekshirish
+      let nextLevelRequirement = levelRequirements[level - 1] + levelUpRequirements[level - 1];
+      let remaining = nextLevelRequirement - progress;
+
+      // Agar kerakli progress yetib kelsa, levelni oshirish
+      if (progress >= nextLevelRequirement) {
+        level++;
+        localStorage.setItem("level", level);
+        levelDisplay.textContent = `Level: ${levelNames[level - 1]}`;
+      }
+
+      // Darajani va qolgan tangalarni yangilash
+      levelDisplay.textContent = `Level: ${levelNames[level - 1]}`;
+      remainingDisplay.textContent = `Remained: ${remaining}`;
+
+      // Progressni saqlash
+      localStorage.setItem("progress", progress);
+
+      // Progress barni yangilash
+      let progressPercent = (progress / nextLevelRequirement) * 100;
+      progressFill.style.width = `${progressPercent}%`;
+    }
+
+    goldCoin.addEventListener("click", () => {
+      let increment = 1;
+
+      if (level == 2) increment = 2;
+      else if (level == 3) increment = 5;
+      else if (level == 4) increment = 10;
+      else if (level == 5) increment = 15;
+      else if (level == 6) increment = 18;
+
+      progress += increment;
+      count++;
+
+      goldCount.textContent = count;
+      localStorage.setItem("goldCount", count); // Tangalar sonini saqlash
+
+      goldCoin.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        goldCoin.style.transform = "scale(1)";
+      }, 300);
+
+      // Level va progressni yangilash
+      updateLevelAndProgress();
+    });
+
+    // Boshlang'ich darajani va progressni yangilash
+    updateLevelAndProgress();
+
+
+  </script>
+</body>
+
+</html>

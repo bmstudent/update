@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #3f2e00, #ffb800);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .a {
+            margin-top: 56px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #efbb75, #cba02c);
+
+
+        }
+
+        #link {
+            width: 100%;
+            padding: 5px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button {
+            padding: 5px 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 18px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .navbar {
+            width: 100%;
+            background: gold;
+            text-align: center;
+            color: #ffcc00;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            z-index: 10;
+        }
+
+        .navbar a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+
+        .active {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ffb800;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" a  p-5 text-center rounded-md w-72 mb-4 ">
+
+        <span class="w-full text-black" id="link">@Tapper_coin_bot</span>
+
+        <button class=" button " onclick="copyLink()">Copy</button>
+    </div>
+
+
+    <h1 style="text-align: center;" class="text-white font-mono text-lg">User Ranking</h1>
+    <table id="rankingTable">
+        <thead>
+            <tr class="font-mono">
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Coins</th>
+            </tr>
+        </thead>
+        <tbody class="font-mono">
+            <!-- Rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+
+
+    <div class="navbar" id="navbar">
+        <div class="navbar" id="navbar">
+            <a href="./index.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./home.png" alt=""></a>
+            <a href="./friends.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./to-do-list.png" alt=""></a>
+            <a href="friends.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./group.png" alt=""></a>
+            <a href="./airdrop.html" class="nav-link" onclick="activateLink(this)"><img class="w-8" src="./coin.png" alt=""></a>
+          </div>
+    <script>
+        function copyLink() {
+            const linkText = document.getElementById("link").textContent; // Havolani oladi
+            navigator.clipboard.writeText(linkText) // Clipboardga yozadi
+                .then(() => {
+                    alert("Havola nusxalandi: " + linkText);
+                })
+                .catch(err => {
+                    alert("Xatolik yuz berdi: " + err);
+                });
+        }
+
+        // Sample user data
+        const users = [
+            { name: 'Alice', coins: 11000000 },
+            { name: 'Bob', coins: 9000000 },
+            { name: 'Charlie', coins: 6000000 },
+            { name: 'Diana', coins: 4000000 },
+            { name: 'Eve', coins: 2500000 }
+        ];
+
+        // Function to generate ranking table
+        function generateRanking(users) {
+            // Sort users by coins in descending order
+            users.sort((a, b) => b.coins - a.coins);
+
+            // Get the table body element
+            const tableBody = document.getElementById('rankingTable').querySelector('tbody');
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            // Populate table rows
+            users.forEach((user, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${user.name}</td>
+                    <td>${user.coins}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Generate the ranking table on page load
+        generateRanking(users);
+
+    </script>
+</body>
+
+</html>
